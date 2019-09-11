@@ -1,6 +1,8 @@
-# ComponentsConf NgRx Workshop 2019
+# Angular Connect NgRx Workshop 2019
 
 ## Setup
+
+Please bring a computer with you. Install Node (v10 or greater) then clone this repository. Checkout the `challenge` branch then install the dependencies:
 
 ```sh
 yarn

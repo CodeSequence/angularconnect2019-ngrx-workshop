@@ -14,3 +14,16 @@ export const metaReducers: MetaReducer<State>[] = [];
 /**
  * Selectors
  */
+export const selectBooksState = (state: State) => state.books;
+export const selectAllBooks = createSelector(
+  selectBooksState,
+  fromBooks.selectAll
+);
+export const selectActiveBook = createSelector(
+  selectBooksState,
+  fromBooks.selectActiveBook
+);
+export const selectBooksEarningsTotals = createSelector(
+  selectBooksState,
+  fromBooks.selectEarningsTotals
+);

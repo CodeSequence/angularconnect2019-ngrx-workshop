@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from "@ngrx/store";
 import { BookModel } from "src/app/shared/models/book.model";
-import { BooksPageActions } from "src/app/books/actions";
+import { BooksPageActions, BooksApiActions } from "src/app/books/actions";
 
 const createBook = (books: BookModel[], book: BookModel) => [...books, book];
 const updateBook = (books: BookModel[], changes: BookModel) =>
@@ -32,6 +32,30 @@ export const booksReducer = createReducer(
     return {
       ...state,
       activeBookId: action.bookId
+    };
+  }),
+  on(BooksApiActions.booksLoaded, (state, action) => {
+    return {
+      ...state,
+      collection: action.books
+    };
+  }),
+  on(BooksApiActions.bookCreated, (state, action) => {
+    return {
+      collection: createBook(state.collection, action.book),
+      activeBookId: null
+    };
+  }),
+  on(BooksApiActions.bookUpdated, (state, action) => {
+    return {
+      collection: updateBook(state.collection, action.book),
+      activeBookId: null
+    };
+  }),
+  on(BooksApiActions.bookDeleted, (state, action) => {
+    return {
+      ...state,
+      collection: deleteBook(state.collection, action.bookId)
     };
   })
 );

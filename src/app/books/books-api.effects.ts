@@ -19,7 +19,7 @@ export class BooksApiEffects {
   @Effect()
   createBook$ = this.actions$.pipe(
     ofType(BooksPageActions.createBook),
-    mergeMap(action =>
+    concatMap(action =>
       this.booksService
         .create(action.book)
         .pipe(map(book => BooksApiActions.bookCreated({ book })))
